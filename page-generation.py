@@ -1,18 +1,31 @@
 import os
-import requests
+from openai import OpenAI
 from pathlib import Path
 
-# Function to fetch the definition of the word from a dictionary API
+# Initialize the OpenAI client with your API key
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+# Function to fetch the definition of the word using OpenAI's Chat API
 def fetch_word_definition(word, language="pl"):
-    api_url = f"https://api.dictionaryapi.dev/api/v2/entries/{language}/{word}"
-    
-    response = requests.get(api_url)
-    
-    if response.status_code == 200:
-        json_response = response.json()
-        if json_response and 'meanings' in json_response[0]:
-            # Return the first definition found
-            return json_response[0]['meanings'][0]['definitions'][0]['definition']
+    prompt = (
+        f"Podaj dokładną definicję słowa '{word}' w języku polskim, "
+        "wraz z przykładami użycia, jeśli to możliwe. Definicja powinna być "
+        "krótka, jasna i zrozumiała, odpowiednia dla osób uczących się języka."
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",  # or "gpt-4" if available
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt},
+        ],
+        max_tokens=100,
+        temperature=0.5,
+    )
+
+    if response.choices and len(response.choices) > 0:
+        definition = response.choices[0].message.content.strip()
+        return definition
     return "Nie znaleziono definicji tego słowa."
 
 # Function to create a new HTML file for a keyword

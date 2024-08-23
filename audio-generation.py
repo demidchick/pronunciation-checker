@@ -2,20 +2,18 @@ import openai
 import os
 from pathlib import Path
 
-# Function to generate the pronunciation audio using the new API
+# Generate the pronunciation audio
 def generate_audio(word, language="pl"):
     # Retrieve the OpenAI API key from the environment variable
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("The OpenAI API key must be set in the environment variable 'OPENAI_API_KEY'.")
 
-    # Initialize the OpenAI client with the API key
     openai.api_key = api_key
 
-    # Define the client
     client = openai.OpenAI()
 
-    # Define the output file path
+    # Output file path
     audio_file_path = Path(f"./audio/{word}.mp3")
 
     # Generate the audio using the updated API
