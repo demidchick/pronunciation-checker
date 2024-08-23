@@ -8,18 +8,16 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 # Function to fetch the definition of the word using OpenAI's Chat API
 def fetch_word_definition(word, language="pl"):
     prompt = (
-        f"Podaj dokładną definicję słowa '{word}' w języku polskim, "
-        "wraz z przykładami użycia, jeśli to możliwe. Definicja powinna być "
-        "krótka, jasna i zrozumiała, odpowiednia dla osób uczących się języka."
+        f"Podaj dokładną definicję słowa '{word}' w języku polskim, wraz z przykładami użycia, jeśli to możliwe. Definicja powinna być krótka, jasna i zrozumiała, odpowiednia dla osób uczących się języka. Dodaj przykłady użycia, jeśli to możliwe. Wszystkie odpowiedzi muszą być w formacie tekstu bez żadnego dodatkowego formatowania."
     )
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a dictionary that gives definitions of the words with giving some examples."},
             {"role": "user", "content": prompt},
         ],
-        max_tokens=100,
+        max_tokens=1000,
         temperature=0.5,
     )
 
