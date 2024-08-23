@@ -1,9 +1,41 @@
+import openai
 import os
-from openai import OpenAI
 from pathlib import Path
 
 # Initialize the OpenAI client with your API key
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise ValueError("The OpenAI API key must be set in the environment variable 'OPENAI_API_KEY'.")
+
+openai.api_key = api_key
+client = openai.OpenAI()
+
+# Function to generate pronunciation audio
+def generate_audio(words, language="pl"):
+    audio_dir = Path("./audio")
+    audio_dir.mkdir(exist_ok=True)
+
+    audio_file_paths = []
+
+    for word in words:
+        # Output file path
+        audio_file_path = audio_dir / f"{word}.mp3"
+
+        # Generate the audio using the OpenAI API
+        response = client.audio.speech.create(
+            model="tts-1",  # Use tts-1-hd for higher quality audio if needed
+            voice="alloy",  # Choose the appropriate voice
+            input=word
+        )
+
+        # Save the audio to the file
+        with open(audio_file_path, "wb") as audio_file:
+            audio_file.write(response.content)
+
+        print(f"Audio file saved at: {audio_file_path}")
+        audio_file_paths.append(str(audio_file_path))
+
+    return audio_file_paths
 
 # Function to fetch the definition of the word using OpenAI's Chat API
 def fetch_word_definition(word, language="pl"):
@@ -141,24 +173,17 @@ def create_html_page(keyword, audio_file_path, definition):
 
     print(f"Page created: {file_path}")
 
-# Main function to process all keywords and generate the corresponding HTML pages
+# Main function to generate audio and create corresponding HTML pages
 def main():
-    audio_dir = Path("audio")
-    if not audio_dir.exists():
-        print(f"Audio directory {audio_dir} does not exist.")
-        return
+    words = ['lamborghini', 'leroy merlin', 'gnocchi', 'mbappe', 'croissant', 'action', 'mojito', 'shein', 'linkedin']
 
-    # Iterate through all mp3 files in the audio directory
-    for audio_file in audio_dir.glob("*.mp3"):
-        keyword = audio_file.stem  # Get the keyword by removing the file extension
-        audio_file_path = audio_file.resolve()
+    # Generate audio files
+    audio_file_paths = generate_audio(words)
 
-        # Fetch the definition for the keyword
+    # Create HTML pages
+    for audio_file_path in audio_file_paths:
+        keyword = Path(audio_file_path).stem  # Get the keyword by removing the file extension
         definition = fetch_word_definition(keyword)
-        if definition == "Nie znaleziono definicji tego słowa.":
-            print(f"Definition not found for keyword: {keyword}")
-        
-        # Create the HTML page for the keyword
         create_html_page(keyword, audio_file_path, definition)
 
 if __name__ == "__main__":

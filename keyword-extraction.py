@@ -20,7 +20,7 @@ def clean_keyword(keyword, prefix):
     return keyword.replace(prefix, "").strip().lower()
 
 def main():
-    seed_query = "jak wymawiać"  # Polish for "how to pronounce"
+    seed_query = "jak się wymawia" 
     
     print(f"Fetching autocomplete suggestions for '{seed_query}'...")
     suggestions = get_google_autocomplete_suggestions(seed_query)
