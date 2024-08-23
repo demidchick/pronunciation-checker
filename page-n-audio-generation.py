@@ -173,9 +173,93 @@ def create_html_page(keyword, audio_file_path, definition):
 
     print(f"Page created: {file_path}")
 
-# Main function to generate audio and create corresponding HTML pages
+# Function to create the index page
+def create_index_page():
+    index_content = """<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dowiedz się, jak wymawiać różne słowa poprawnie. Posłuchaj audio i ucz się wymowy z nami!">
+    <title>Jak wymawiać te słowa?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {{
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }}
+
+        .container {{
+            max-width: 800px;
+            margin-left: 50px;
+            margin-right: auto;
+        }}
+
+        h1 {{
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: #2E2E2E;
+            font-weight: 600;
+        }}
+
+        ul {{
+            font-size: 1.125rem;
+            line-height: 1.8;
+            list-style: none;
+            padding-left: 0;
+        }}
+
+        ul li {{
+            margin: 10px 0;
+        }}
+
+        ul li a {{
+            color: #3366FF;
+            text-decoration: none;
+            font-weight: 600;
+        }}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Naucz się wymawiać te słowa</h1>
+            <p>Dowiedz się, jak poprawnie wymawiać różne trudne słowa:</p>
+        </header>
+        <section>
+            <ul>
+"""
+
+    # Dynamically add links to pages in the "pages" folder
+    pages_dir = Path("pages")
+    for page_file in pages_dir.glob("*.html"):
+        keyword = page_file.stem
+        index_content += f'                <li><a href="pages/{page_file.name}">{keyword.capitalize()}</a></li>\n'
+
+    # Close the HTML structure
+    index_content += """            </ul>
+        </section>
+    </div>
+</body>
+
+</html>"""
+
+    # Write the index content to the index.html file
+    with open("index.html", "w", encoding="utf-8") as file:
+        file.write(index_content)
+
+    print("Index page created: index.html")
+
+# Main function to generate audio, create corresponding HTML pages, and update the index page
 def main():
-    words = ['lamborghini', 'leroy merlin', 'gnocchi', 'mbappe', 'croissant', 'action', 'mojito', 'shein', 'linkedin']
+    words = ['lamborghini', 'leroy merlin', 'gnocchi']
 
     # Generate audio files
     audio_file_paths = generate_audio(words)
@@ -185,6 +269,9 @@ def main():
         keyword = Path(audio_file_path).stem  # Get the keyword by removing the file extension
         definition = fetch_word_definition(keyword)
         create_html_page(keyword, audio_file_path, definition)
+
+    # Create the index page with links to all generated pages
+    create_index_page()
 
 if __name__ == "__main__":
     main()
