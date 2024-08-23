@@ -7,33 +7,102 @@
     <meta name="description"
         content="Dowiedz się, jak wymawiać 'gnocchi' poprawnie. Posłuchaj audio i ucz się wymowy z nami!">
     <title>Jak wymawiać 'gnocchi' - Nauka Wymowy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2E2E2E;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        p {
+            margin: 0 auto;
+            max-width: 700px;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        audio {
+            display: block;
+            margin: 20px auto;
+        }
+
+        .banner {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #F2F4F7;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .banner a {
+            color: #3366FF;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .content {
+            margin-top: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Jak wymawiać 'gnocchi'?</h1>
-    <p>Słowo 'gnocchi' może być trudne do wymówienia dla osób nieznających języka włoskiego. Oto jak poprawnie wymawiać
-        'gnocchi':</p>
+    <header>
+        <h1>Jak wymawiać 'gnocchi'?</h1>
+        <p>Słowo 'gnocchi' może być trudne do wymówienia dla osób nieznających języka włoskiego. Oto jak poprawnie
+            wymawiać 'gnocchi':</p>
+    </header>
 
-    <!-- Audio file -->
-    <audio controls>
-        <source src="audio/gnocchi.mp3" type="audio/mpeg">
-        Twoja przeglądarka nie obsługuje elementu audio.
-    </audio>
+    <section>
+        <!-- Audio file -->
+        <audio controls>
+            <source src="audio/gnocchi.mp3" type="audio/mpeg">
+            Twoja przeglądarka nie obsługuje elementu audio.
+        </audio>
+    </section>
 
-    <!-- Upsell Banner -->
-    <div style="margin-top: 20px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd;">
-        <h2>Popraw swoją wymowę z naszym kursem!</h2>
-        <p>Dołącz do naszego kursu online, który pomoże Ci poprawić wymowę trudnych słów w różnych językach. <a
-                href="https://yourservice.com">Zapisz się teraz!</a></p>
-    </div>
+    <section class="banner">
+        <h2>Popraw swoją wymowę z naszą aplikacją!</h2>
+        <p>Pobierz naszą aplikację, która pomoże Ci poprawić wymowę trudnych słów w różnych językach. <a
+                href="https://gov.pl">Zainstaluj teraz!</a></p>
+    </section>
 
-    <!-- SEO Copy -->
-    <div style="margin-top: 40px;">
+    <section class="content">
         <h3>Znaczenie 'gnocchi'</h3>
         <p>Gnocchi to włoskie kluski robione z ziemniaków, mąki i jajek. Są popularne we Włoszech i na całym świecie,
             jednak ich wymowa może być trudna dla osób, które nie są rodowitymi Włochami. Słowo to wymawia się jako
             'ńjoki'.</p>
-    </div>
+    </section>
 </body>
 
 </html>
