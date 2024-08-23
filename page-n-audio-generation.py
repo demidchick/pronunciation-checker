@@ -208,6 +208,11 @@ def create_index_page():
             font-weight: 600;
         }}
 
+        p {{
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }}
+
         ul {{
             font-size: 1.125rem;
             line-height: 1.8;
@@ -220,6 +225,21 @@ def create_index_page():
         }}
 
         ul li a {{
+            color: #3366FF;
+            text-decoration: none;
+            font-weight: 600;
+        }}
+
+        .banner {{
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #F2F4F7;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+            text-align: left;
+        }}
+
+        .banner a {{
             color: #3366FF;
             text-decoration: none;
             font-weight: 600;
@@ -246,6 +266,13 @@ def create_index_page():
     # Close the HTML structure
     index_content += """            </ul>
         </section>
+
+        <section class="banner">
+            <h2>Popraw swoją wymowę z naszą aplikacją!</h2>
+            <p>Pobierz naszą aplikację, która pomoże Ci poprawić wymowę trudnych słów w różnych językach. <a
+                    href="https://gov.pl">Zainstaluj teraz!</a></p>
+        </section>
+
     </div>
 </body>
 
@@ -259,7 +286,7 @@ def create_index_page():
 
 # Main function to generate audio, create corresponding HTML pages, and update the index page
 def main():
-    words = ['lamborghini', 'leroy merlin', 'gnocchi']
+    words = ['lamborghini', 'leroy merlin', 'gnocchi', 'mbappe', 'croissant', 'action', 'mojito', 'shein', 'linkedin']
 
     # Generate audio files
     audio_file_paths = generate_audio(words)
