@@ -58,8 +58,10 @@ def fetch_word_definition(word, language="pl"):
         return definition
     return "Nie znaleziono definicji tego słowa."
 
-# Function to create a new HTML file for a keyword
 def create_html_page(keyword, audio_file_path, definition):
+    # Update the path to be relative to the 'pages' directory
+    audio_relative_path = "../" + audio_file_path
+
     html_template = f"""<!DOCTYPE html>
 <html lang="pl">
 
@@ -144,7 +146,7 @@ def create_html_page(keyword, audio_file_path, definition):
         <section>
             <!-- Audio file -->
             <audio controls>
-                <source src="{audio_file_path}" type="audio/mpeg">
+                <source src="{audio_relative_path}" type="audio/mpeg">
                 Twoja przeglądarka nie obsługuje elementu audio.
             </audio>
         </section>
