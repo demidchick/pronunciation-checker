@@ -12,7 +12,7 @@ client = openai.OpenAI()
 
 # Function to generate pronunciation audio
 def generate_audio(words, language="pl"):
-    audio_dir = Path("./audio")
+    audio_dir = Path("audio/")
     audio_dir.mkdir(exist_ok=True)
 
     audio_file_paths = []
@@ -286,7 +286,7 @@ def create_index_page():
 
 # Main function to generate audio, create corresponding HTML pages, and update the index page
 def main():
-    words = ['lamborghini', 'leroy merlin', 'gnocchi', 'mbappe', 'croissant', 'action', 'mojito', 'shein', 'linkedin']
+    words = ['lamborghini']
 
     # Generate audio files
     audio_file_paths = generate_audio(words)
