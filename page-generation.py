@@ -4,7 +4,6 @@ from pathlib import Path
 
 # Function to fetch the definition of the word from a dictionary API
 def fetch_word_definition(word, language="pl"):
-    # Here, we're using the Owlbot API for demonstration purposes.
     api_url = f"https://api.dictionaryapi.dev/api/v2/entries/{language}/{word}"
     
     response = requests.get(api_url)
@@ -18,7 +17,6 @@ def fetch_word_definition(word, language="pl"):
 
 # Function to create a new HTML file for a keyword
 def create_html_page(keyword, audio_file_path, definition):
-    # Define the HTML content template
     html_template = f"""<!DOCTYPE html>
 <html lang="pl">
 
@@ -42,7 +40,6 @@ def create_html_page(keyword, audio_file_path, definition):
         .container {{
             max-width: 800px;
             margin-left: 50px;
-            /* This pushes the content towards the center while keeping it aligned left */
             margin-right: auto;
         }}
 
@@ -75,7 +72,6 @@ def create_html_page(keyword, audio_file_path, definition):
             border-radius: 8px;
             border: 1px solid #E0E0E0;
             text-align: left;
-            /* Aligns text to the left inside the banner */
         }}
 
         .banner a {{
@@ -125,12 +121,10 @@ def create_html_page(keyword, audio_file_path, definition):
 
 </html>"""
 
-    # Define the file path
     output_dir = Path("pages")
     output_dir.mkdir(exist_ok=True)
     file_path = output_dir / f"{keyword}.html"
 
-    # Write the HTML content to the file
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(html_template)
 
@@ -138,11 +132,22 @@ def create_html_page(keyword, audio_file_path, definition):
 
 # Main function to process all keywords and generate the corresponding HTML pages
 def main():
-    # List of keywords and their corresponding audio file paths
-    keywords = ["croissant"]  # Replace with your actual keywords
-    for keyword in keywords:
-        audio_file_path = f"audio/{keyword}.mp3"  # Update the audio path accordingly
-        definition = fetch_word_definition(keyword)  # Fetch the definition for the keyword
+    audio_dir = Path("audio")
+    if not audio_dir.exists():
+        print(f"Audio directory {audio_dir} does not exist.")
+        return
+
+    # Iterate through all mp3 files in the audio directory
+    for audio_file in audio_dir.glob("*.mp3"):
+        keyword = audio_file.stem  # Get the keyword by removing the file extension
+        audio_file_path = audio_file.resolve()
+
+        # Fetch the definition for the keyword
+        definition = fetch_word_definition(keyword)
+        if definition == "Nie znaleziono definicji tego słowa.":
+            print(f"Definition not found for keyword: {keyword}")
+        
+        # Create the HTML page for the keyword
         create_html_page(keyword, audio_file_path, definition)
 
 if __name__ == "__main__":
