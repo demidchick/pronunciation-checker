@@ -11,7 +11,7 @@ def get_google_autocomplete_suggestions(query, language="pl"):
     suggestions = response.json()[1]  # Get the list of suggestions from the response
     return suggestions
 
-def pick_top_keywords(suggestions, n=5):
+def pick_top_keywords(suggestions, n=50):
     """Picks the top N keywords from the suggestions."""
     return suggestions[:n]
 
@@ -31,7 +31,7 @@ def main():
     
     top_keywords = pick_top_keywords(cleaned_keywords)
     
-    print("Top 5 keywords:", top_keywords)
+    print("Top 50 keywords:", top_keywords)
     return top_keywords
 
 if __name__ == "__main__":

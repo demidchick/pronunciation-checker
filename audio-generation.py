@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 # Generate the pronunciation audio
-def generate_audio(word, language="pl"):
+def generate_audio(words, language="pl"):
     # Retrieve the OpenAI API key from the environment variable
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -13,42 +13,35 @@ def generate_audio(word, language="pl"):
 
     client = openai.OpenAI()
 
-    # Output file path
-    audio_file_path = Path(f"./audio/{word}.mp3")
+    audio_dir = Path("./audio")
+    audio_dir.mkdir(exist_ok=True)
 
-    # Generate the audio using the updated API
-    response = client.audio.speech.create(
-        model="tts-1",  # Use tts-1-hd for higher quality audio if needed
-        voice="alloy",  # Choose the appropriate voice
-        input=word
-    )
+    for word in words:
+        # Output file path
+        audio_file_path = audio_dir / f"{word}.mp3"
 
-    # Save the audio to the file
-    response.stream_to_file(audio_file_path)
+        # Generate the audio using the updated API
+        response = client.audio.speech.create(
+            model="tts-1",  # Use tts-1-hd for higher quality audio if needed
+            voice="alloy",  # Choose the appropriate voice
+            input=word
+        )
 
-    return str(audio_file_path)
+        # Save the audio to the file
+        with open(audio_file_path, "wb") as audio_file:
+            audio_file.write(response.content)
 
-# Function to update the HTML file with the new audio
-def update_html(audio_file_path, word):
-    html_file_path = "index.html"
-    with open(html_file_path, "r") as file:
-        html_content = file.read()
+        print(f"Audio file saved at: {audio_file_path}")
 
-    # Update the src attribute for the audio tag
-    old_audio_tag = f'<source src="audio/{word}.mp3" type="audio/mpeg">'
-    new_audio_tag = f'<source src="{audio_file_path}" type="audio/mpeg">'
-    updated_content = html_content.replace(old_audio_tag, new_audio_tag)
+    return [str(audio_dir / f"{word}.mp3") for word in words]
 
-    # Save the updated HTML
-    with open(html_file_path, "w") as file:
-        file.write(updated_content)
-
-# Main function to generate audio and update HTML
+# Main function to generate audio
 def main():
-    word = "croissant"
+    words = ["gnocchi","croissant","shein",""]
 
-    audio_file_path = generate_audio(word)
-    update_html(audio_file_path, word)
+    audio_file_paths = generate_audio(words)
+    for path in audio_file_paths:
+        print(f"Audio file saved at: {path}")
 
 if __name__ == "__main__":
     main()

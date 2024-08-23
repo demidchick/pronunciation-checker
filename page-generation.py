@@ -14,7 +14,7 @@ def fetch_word_definition(word, language="pl"):
     )
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",  # or "gpt-4" if available
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
