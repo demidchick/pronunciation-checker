@@ -152,7 +152,7 @@ def create_html_page(keyword, audio_file_path, definition):
         <section class="banner">
             <h2>Popraw swoją wymowę z naszą aplikacją!</h2>
             <p>Pobierz naszą aplikację, która pomoże Ci poprawić wymowę trudnych słów w różnych językach. <a
-                    href="https://gov.pl">Zainstaluj teraz!</a></p>
+                    href="https://gov.pl">Zarejestruj się teraz</a></p>
         </section>
 
         <section class="content">
@@ -175,7 +175,7 @@ def create_html_page(keyword, audio_file_path, definition):
 
 # Function to create the index page
 def create_index_page():
-    index_content = """<!DOCTYPE html>
+    index_content = f"""<!DOCTYPE html>
 <html lang="pl">
 
 <head>
@@ -270,7 +270,7 @@ def create_index_page():
         <section class="banner">
             <h2>Popraw swoją wymowę z naszą aplikacją!</h2>
             <p>Pobierz naszą aplikację, która pomoże Ci poprawić wymowę trudnych słów w różnych językach. <a
-                    href="https://gov.pl">Zainstaluj teraz!</a></p>
+                    href="https://gov.pl">Zarejestruj się teraz!</a></p>
         </section>
 
     </div>
@@ -286,7 +286,7 @@ def create_index_page():
 
 # Main function to generate audio, create corresponding HTML pages, and update the index page
 def main():
-    words = ['lamborghini', 'leroy merlin', 'gnocchi', 'mbappe', 'croissant', 'action', 'mojito', 'shein', 'linkedin']
+    words = ['lamborghini']
 
     # Generate audio files
     audio_file_paths = generate_audio(words)
