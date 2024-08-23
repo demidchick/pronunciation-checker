@@ -37,8 +37,9 @@ def update_html(audio_file_path, word):
         html_content = file.read()
 
     # Update the src attribute for the audio tag
+    old_audio_tag = f'<source src="audio/{word}.mp3" type="audio/mpeg">'
     new_audio_tag = f'<source src="{audio_file_path}" type="audio/mpeg">'
-    updated_content = html_content.replace('<source src="audio/gnocchi.mp3" type="audio/mpeg">', new_audio_tag)
+    updated_content = html_content.replace(old_audio_tag, new_audio_tag)
 
     # Save the updated HTML
     with open(html_file_path, "w") as file:
@@ -46,7 +47,7 @@ def update_html(audio_file_path, word):
 
 # Main function to generate audio and update HTML
 def main():
-    word = "gnocchi"
+    word = "croissant"
 
     audio_file_path = generate_audio(word)
     update_html(audio_file_path, word)
