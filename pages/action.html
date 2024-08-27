@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Dowiedz się, jak wymawiać różne słowa poprawnie. Posłuchaj audio i ucz się wymowy z nami!">
-    <title>Jak wymawiać te słowa?</title>
+        content="Dowiedz się, jak wymawiać 'action' poprawnie. Posłuchaj audio i ucz się wymowy z nami!">
+    <title>Jak wymawiać 'action'?</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -24,11 +24,16 @@
             margin-right: auto;
         }
 
+        h1,
+        h2,
+        h3 {
+            color: #2E2E2E;
+            font-weight: 600;
+        }
+
         h1 {
             font-size: 2.5rem;
             margin: 20px 0;
-            color: #2E2E2E;
-            font-weight: 600;
         }
 
         p {
@@ -36,21 +41,9 @@
             line-height: 1.8;
         }
 
-        ul {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            margin: 10px 0;
-        }
-
-        ul li a {
-            color: #3366FF;
-            text-decoration: none;
-            font-weight: 600;
+        audio {
+            display: block;
+            margin: 20px 0;
         }
 
         .banner {
@@ -67,35 +60,48 @@
             text-decoration: none;
             font-weight: 600;
         }
+
+        .content {
+            margin-top: 40px;
+        }
+
+        .content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Naucz się wymawiać te słowa</h1>
-            <p>Dowiedz się, jak poprawnie wymawiać różne trudne słowa:</p>
+            <h1>Jak wymawiać 'action'?</h1>
+            <p>Słowo 'action' może być trudne do wymówienia. Oto jak poprawnie wymawiać 'action':</p>
         </header>
+
         <section>
-            <ul>
-                <li><a href="pages/po angielsku.html">Po angielsku</a></li>
-                <li><a href="pages/mbappe.html">Mbappe</a></li>
-                <li><a href="pages/croissant.html">Croissant</a></li>
-                <li><a href="pages/lamborghini.html">Lamborghini</a></li>
-                <li><a href="pages/mojito.html">Mojito</a></li>
-                <li><a href="pages/gnocchi.html">Gnocchi</a></li>
-                <li><a href="pages/action.html">Action</a></li>
-                <li><a href="pages/leroy merlin.html">Leroy merlin</a></li>
-                <li><a href="pages/shein.html">Shein</a></li>
-            </ul>
+            <!-- Audio file -->
+            <audio controls>
+                <source src="../audio/action.mp3" type="audio/mpeg">
+                Twoja przeglądarka nie obsługuje elementu audio.
+            </audio>
         </section>
 
         <section class="banner">
             <h2>Popraw swoją wymowę z naszą aplikacją!</h2>
             <p>Pobierz naszą aplikację, która pomoże Ci poprawić wymowę trudnych słów w różnych językach. <a
-                    href="https://gov.pl">Zarejestruj się teraz!</a></p>
+                    href="https://gov.pl">Zarejestruj się teraz</a></p>
         </section>
 
+        <section class="content">
+            <h3>Znaczenie 'action'</h3>
+            <p>Słowo 'action' w języku polskim oznacza 'działanie' lub 'czynność'. Odnosi się do aktów, które są podejmowane w celu osiągnięcia jakiegoś rezultatu lub celu.
+
+Przykłady użycia:
+1. W filmach akcji zawsze jest dużo ekscytujących działań.
+2. Jego działanie było nieprzemyślane i spowodowało problemy.
+3. Podejmowanie działań na rzecz ochrony środowiska jest bardzo ważne.</p>
+        </section>
     </div>
 </body>
 

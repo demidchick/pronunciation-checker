@@ -288,7 +288,7 @@ def create_index_page():
 
 # Main function to generate audio, create corresponding HTML pages, and update the index page
 def main():
-    words = ['lamborghini', 'leroy merlin', 'gnocchi', 'mbappe', 'croissant', 'action', 'mojito', 'shein', 'linkedin']
+    words = ['gnocchi', 'lamborghini', 'leroy merlin', 'po angielsku', 'mbappe', 'action', 'croissant', 'mojito', 'shein']
 
     # Generate audio files
     audio_file_paths = generate_audio(words)
